@@ -201,4 +201,5 @@ export function applyFonts() {
   // Aplicar apenas as CSS variables (fontes já estão no index.html)
   document.documentElement.style.setProperty('--font-body', preset.body);
   document.documentElement.style.setProperty('--font-heading', preset.heading);
+  document.documentElement.style.setProperty('--font-scale', String(preset.scale));
 }

@@ -100,7 +100,7 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
           isPix && !isUser && 'quote-highlight'
         )}
       >
-        <p className="text-lg leading-relaxed whitespace-pre-wrap inline">
+        <p className="leading-relaxed whitespace-pre-wrap inline">
           {!isUser ? renderTextWithLinks(displayedText) : renderTextWithLinks(message.content)}
           {!isUser && isTyping && <span className="animate-pulse">▋</span>}
           <span className={cn(

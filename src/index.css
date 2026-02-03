@@ -9,6 +9,7 @@
     /* Fontes (aplicadas dinamicamente via JS) */
     --font-body: 'Crimson Pro', ui-serif, Georgia, serif;
     --font-heading: 'Space Grotesk', system-ui, sans-serif;
+    --font-scale: 1;
 
     --background: 60 3% 15%;
     --background-secondary: 60 3% 15%;
@@ -156,6 +157,7 @@
     border-top: 1.5px solid hsl(var(--primary) / 0.5);
     border-radius: 1.75rem 1.75rem 0.5rem 1.75rem;
     color: hsl(210 40% 98%);
+    font-size: calc(1.125rem * var(--font-scale));
   }
 
   .message-assistant {
@@ -166,6 +168,7 @@
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.03),
       0 4px 20px -6px rgba(0, 0, 0, 0.4);
+    font-size: calc(1.125rem * var(--font-scale));
   }
 
   .quote-highlight {

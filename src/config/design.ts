@@ -28,17 +28,20 @@ export const FONT_PRESETS = {
   DEFAULT: {
     body: "'Crimson Pro', ui-serif, Georgia, serif",
     heading: "'Space Grotesk', system-ui, sans-serif",
-    local: false, // carregada via Google Fonts
+    local: false,
+    scale: 1,     // fator de escala para FAQs e balões de diálogo
   },
   POPPINS: {
     body: "'Poppins', system-ui, sans-serif",
     heading: "'Poppins', system-ui, sans-serif",
-    local: true, // carregada localmente (400 + 600)
+    local: true,
+    scale: 0.88,  // Poppins tem x-height maior, reduz nos balões e FAQs
   },
   MONTSERRAT: {
     body: "'Montserrat', system-ui, sans-serif",
     heading: "'Montserrat', system-ui, sans-serif",
-    local: true, // carregada localmente (400 + 600)
+    local: true,
+    scale: 0.88,  // Montserrat tem x-height maior, reduz nos balões e FAQs
   }
 } as const;
 
