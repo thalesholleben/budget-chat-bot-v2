@@ -203,7 +203,8 @@ export const useChat = () => {
         value: data.value,
         pixKey: data.pixKey,
         pixType: data.pixType,
-        priceItems: data.priceItems
+        priceItems: data.priceItems,
+        showTotal: data.showTotal
       };
 
       setMessages(prev => [...prev, assistantMessage]);

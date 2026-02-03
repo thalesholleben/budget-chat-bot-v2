@@ -1,6 +1,6 @@
 export interface PriceItem {
   name: string;
-  price: number;
+  price: number | null;
 }
 
 export interface ChatMessage {
@@ -13,6 +13,7 @@ export interface ChatMessage {
   pixKey?: string | null;
   pixType?: 'CPF' | 'Celular' | 'Email' | null;
   priceItems?: PriceItem[] | null;
+  showTotal?: boolean;
 }
 
 export interface WebhookRequest {
@@ -30,6 +31,7 @@ export interface WebhookResponse {
   pixKey?: string | null;
   pixType?: 'CPF' | 'Celular' | 'Email' | null;
   priceItems?: PriceItem[] | null;
+  showTotal?: boolean;
 }
 
 export interface ChatSession {
