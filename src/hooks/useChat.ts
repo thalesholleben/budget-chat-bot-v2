@@ -193,12 +193,9 @@ export const useChat = () => {
       }
 
       const raw = await response.json();
-      console.log('[DEBUG] Webhook raw response:', JSON.stringify(raw));
 
       // Se a resposta for um array, pega o primeiro elemento
       const data: WebhookResponse = Array.isArray(raw) ? raw[0] : raw;
-      console.log('[DEBUG] Parsed data:', JSON.stringify(data));
-      console.log('[DEBUG] showTotal:', data.showTotal, 'type:', typeof data.showTotal);
 
       const assistantMessage: ChatMessage = {
         id: generateId(),
