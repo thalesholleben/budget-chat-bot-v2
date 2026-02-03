@@ -52,6 +52,10 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
     }).format(value);
   };
 
+  const isValidPrice = (price: number | null | undefined): price is number => {
+    return price !== null && price !== undefined && price > 0 && !isNaN(price);
+  };
+
   const handleCopyPixKey = async () => {
     if (!message.pixKey) return;
     try {
@@ -169,16 +173,20 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
                 >
                   <span className="text-[13px] text-foreground/85 truncate">{item.name}</span>
                   <span className="text-[13px] font-semibold text-foreground/95 whitespace-nowrap">
-                    {formatValue(item.price)}
+                    {isValidPrice(item.price) ? formatValue(item.price) : '-'}
                   </span>
                 </div>
               ))}
             </div>
-            {message.priceItems.length > 1 && (
+            {message.showTotal === true && message.priceItems.length > 1 && (
               <div className="flex items-center justify-between gap-3 mt-2 pt-2 border-t border-primary/30 px-1">
                 <span className="text-xs font-medium text-muted-foreground">Total</span>
                 <span className="text-lg font-bold gradient-text font-heading">
-                  {formatValue(message.priceItems.reduce((sum, item) => sum + item.price, 0))}
+                  {formatValue(
+                    message.priceItems
+                      .filter(item => isValidPrice(item.price))
+                      .reduce((sum, item) => sum + item.price!, 0)
+                  )}
                 </span>
               </div>
             )}
