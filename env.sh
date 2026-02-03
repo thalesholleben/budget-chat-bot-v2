@@ -24,8 +24,10 @@ echo "env-config.js generated successfully"
 # Processar template nginx.conf com variáveis de ambiente
 export WEBHOOK_URL_BACKEND="${VITE_WEBHOOK_URL:-}"
 export WEBHOOK_API_KEY_BACKEND="${VITE_WEBHOOK_API_KEY:-}"
+export RULES_URL_BACKEND="${RULES_URL_BACKEND:-}"
+export RULES_API_KEY_BACKEND="${RULES_API_KEY_BACKEND:-}"
 
-envsubst '${WEBHOOK_URL_BACKEND} ${WEBHOOK_API_KEY_BACKEND}' \
+envsubst '${WEBHOOK_URL_BACKEND} ${WEBHOOK_API_KEY_BACKEND} ${RULES_URL_BACKEND} ${RULES_API_KEY_BACKEND}' \
   < /etc/nginx/templates/default.conf.template \
   > /etc/nginx/conf.d/default.conf
 
