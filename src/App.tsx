@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import { applyAccentColors, applyBackgroundColor, applyFonts } from "@/lib/theme";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <Suspense fallback={<div>Carregando...</div>}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

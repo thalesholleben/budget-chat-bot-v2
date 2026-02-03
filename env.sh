@@ -30,3 +30,12 @@ envsubst '${WEBHOOK_URL_BACKEND} ${WEBHOOK_API_KEY_BACKEND}' \
   > /etc/nginx/conf.d/default.conf
 
 echo "nginx.conf configured with webhook proxy"
+
+# Gerar .htpasswd para /admin (HTTP Basic Auth)
+if [ -n "${ADMIN_USER:-}" ] && [ -n "${ADMIN_PASSWORD:-}" ]; then
+  printf '%s:%s\n' "$ADMIN_USER" "$(openssl passwd -apr1 "$ADMIN_PASSWORD")" > /etc/nginx/.htpasswd
+  echo "htpasswd generated for admin user: $ADMIN_USER"
+else
+  echo "WARNING: ADMIN_USER/ADMIN_PASSWORD not set, /admin will be unprotected"
+  touch /etc/nginx/.htpasswd
+fi
