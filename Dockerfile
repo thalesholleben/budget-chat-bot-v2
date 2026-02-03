@@ -51,8 +51,8 @@ RUN mkdir -p /etc/nginx/templates
 # Copiar template do Nginx (será processado em runtime)
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
-# Instalar envsubst para processar variáveis no template
-RUN apk add --no-cache gettext
+# Instalar envsubst + htpasswd para processar variáveis e gerar auth
+RUN apk add --no-cache gettext apache2-utils
 
 # Copiar script de injeção de variáveis em runtime
 COPY env.sh /docker-entrypoint.d/40-env-config.sh

@@ -33,7 +33,7 @@ echo "nginx.conf configured with webhook proxy"
 
 # Gerar .htpasswd para /admin (HTTP Basic Auth)
 if [ -n "${ADMIN_USER:-}" ] && [ -n "${ADMIN_PASSWORD:-}" ]; then
-  printf '%s:%s\n' "$ADMIN_USER" "$(openssl passwd -apr1 "$ADMIN_PASSWORD")" > /etc/nginx/.htpasswd
+  htpasswd -bc /etc/nginx/.htpasswd "$ADMIN_USER" "$ADMIN_PASSWORD"
   echo "htpasswd generated for admin user: $ADMIN_USER"
 else
   echo "WARNING: ADMIN_USER/ADMIN_PASSWORD not set, /admin will be unprotected"
