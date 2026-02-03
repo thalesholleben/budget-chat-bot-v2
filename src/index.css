@@ -138,14 +138,14 @@
   }
 
   .message-user {
-    background: hsl(60 3% 12%);
+    background: hsl(var(--primary) / 0.15);
     border: 1.5px solid hsl(var(--primary) / 0.4);
     border-radius: 1.75rem 1.75rem 0.5rem 1.75rem;
     color: hsl(210 40% 98%);
   }
 
   .message-assistant {
-    background: hsl(60 3% 20%);
+    background: hsl(var(--primary) / 0.08);
     border: 1px solid hsla(var(--border), 0.5);
     border-radius: 1.75rem 1.75rem 1.75rem 0.5rem;
     box-shadow:
