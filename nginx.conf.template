@@ -63,10 +63,12 @@ server {
         add_header Expires "0";
     }
 
-    # Proteger /admin com HTTP Basic Auth
+    # Proteger /admin com HTTP Basic Auth + Rate Limiting
     location /admin {
         auth_basic "Area Restrita";
         auth_basic_user_file /etc/nginx/.htpasswd;
+        limit_req zone=admin_limit burst=5 nodelay;
+        limit_req_status 429;
         try_files $uri $uri/ /index.html;
     }
 

@@ -51,6 +51,9 @@ RUN mkdir -p /etc/nginx/templates
 # Copiar template do Nginx (será processado em runtime)
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
+# Rate limiting config (nível http, carregado antes do server block)
+COPY rate-limit.conf /etc/nginx/conf.d/rate-limit.conf
+
 # Instalar envsubst + htpasswd para processar variáveis e gerar auth
 RUN apk add --no-cache gettext apache2-utils
 
