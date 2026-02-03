@@ -5,7 +5,7 @@
 // Após alterar, faça commit + push para aplicar.
 // ============================================
 
-export const FONT_PRESET = 'DEFAULT';
+export const FONT_PRESET = 'MONTSERRAT';
 
 // ============================================
 // CONFIGURAÇÃO DAS FONTES (não precisa mexer aqui)
