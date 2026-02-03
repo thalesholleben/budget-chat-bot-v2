@@ -20,8 +20,6 @@ export interface WebhookRequest {
   session_id: string;
   message: string;
   firstmsg: boolean;
-  business_rules?: string;
-  business_rules_hash?: string;
 }
 
 export interface WebhookResponse {

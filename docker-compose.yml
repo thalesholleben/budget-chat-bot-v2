@@ -34,6 +34,8 @@ services:
       - VITE_FAQ_3=${VITE_FAQ_3}
       - VITE_FAQ_4=${VITE_FAQ_4}
       - VITE_FAQ_5=${VITE_FAQ_5}
+      - RULES_URL_BACKEND=${RULES_URL_BACKEND}
+      - RULES_API_KEY_BACKEND=${RULES_API_KEY_BACKEND}
     restart: unless-stopped
 
 networks:

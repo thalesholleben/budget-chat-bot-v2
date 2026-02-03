@@ -167,17 +167,10 @@ export const useChat = () => {
     setIsLoading(true);
 
     try {
-      const businessRules = localStorage.getItem('business_rules') || '';
-      const businessRulesHash = businessRules
-        ? CryptoJS.SHA256(businessRules).toString().substring(0, 8)
-        : '';
-
       const payload: WebhookRequest = {
         session_id: sessionId,
         message: sanitized,
         firstmsg: isFirstMessage,
-        business_rules: businessRules || undefined,
-        business_rules_hash: businessRulesHash || undefined
       };
 
       const response = await fetch(WEBHOOK_URL, {
