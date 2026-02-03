@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  octopus-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_WEBHOOK_URL=${VITE_WEBHOOK_URL}
+        - VITE_WEBHOOK_API_KEY=${VITE_WEBHOOK_API_KEY}
+        - VITE_EXTERNAL_LINK=${VITE_EXTERNAL_LINK}
+        - VITE_PROFESSIONAL_NAME=${VITE_PROFESSIONAL_NAME}
+        - VITE_PROFESSIONAL_TITLE=${VITE_PROFESSIONAL_TITLE}
+        - VITE_HEADER_SUBTITLE=${VITE_HEADER_SUBTITLE}
+        - VITE_FAQ_1=${VITE_FAQ_1}
+        - VITE_FAQ_2=${VITE_FAQ_2}
+        - VITE_FAQ_3=${VITE_FAQ_3}
+        - VITE_FAQ_4=${VITE_FAQ_4}
+        - VITE_FAQ_5=${VITE_FAQ_5}
+    container_name: chat-bot-app
+    networks:
+      - easypanel
+    expose:
+      - "80"
+    environment:
+      - VITE_WEBHOOK_URL=${VITE_WEBHOOK_URL}
+      - VITE_WEBHOOK_API_KEY=${VITE_WEBHOOK_API_KEY}
+      - VITE_EXTERNAL_LINK=${VITE_EXTERNAL_LINK}
+      - VITE_PROFESSIONAL_NAME=${VITE_PROFESSIONAL_NAME}
+      - VITE_PROFESSIONAL_TITLE=${VITE_PROFESSIONAL_TITLE}
+      - VITE_HEADER_SUBTITLE=${VITE_HEADER_SUBTITLE}
+      - VITE_FAQ_1=${VITE_FAQ_1}
+      - VITE_FAQ_2=${VITE_FAQ_2}
+      - VITE_FAQ_3=${VITE_FAQ_3}
+      - VITE_FAQ_4=${VITE_FAQ_4}
+      - VITE_FAQ_5=${VITE_FAQ_5}
+    restart: unless-stopped
+
+networks:
+  easypanel:
+    external: true

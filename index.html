@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Async load fonts (already has display=swap in URL) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Preload critical scripts -->
+    <link rel="preload" as="script" href="/env-config.js">
+
+    <!-- Critical CSS Inline (above-the-fold rendering) -->
+    <style>
+      *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}
+      html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}
+      body{margin:0;line-height:inherit;background:hsl(60 3% 15%);color:hsl(210 40% 98%);font-family:ui-serif,Georgia,serif}
+      #root{min-height:100vh;display:flex;flex-direction:column}
+      :root{--background:60 3% 15%;--foreground:210 40% 98%;--primary:216 56% 42%}
+      .bg-background{background-color:hsl(var(--background))}
+      .text-foreground{color:hsl(var(--foreground))}
+    </style>
+
+    <title>Octopus AI Assistant</title>
+    <meta name="description" content="Assistente inteligente para orçamentos e briefings." />
+
+    <meta property="og:title" content="Octopus AI Assistant" />
+    <meta property="og:description" content="Assistente inteligente para orçamentos e briefings. Especialista em Automação, IA e SaaS." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/placeholder.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Octopus AI Assistant" />
+    <meta name="twitter:description" content="Assistente inteligente para orçamentos e briefings" />
+    <meta name="twitter:image" content="/placeholder.svg" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="/env-config.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
