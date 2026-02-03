@@ -192,7 +192,12 @@ export const useChat = () => {
         throw new Error(`Erro na resposta: ${response.status}`);
       }
 
-      const data: WebhookResponse = await response.json();
+      let data: WebhookResponse = await response.json();
+
+      // Se a resposta for um array, pega o primeiro elemento
+      if (Array.isArray(data)) {
+        data = data[0];
+      }
 
       const assistantMessage: ChatMessage = {
         id: generateId(),
