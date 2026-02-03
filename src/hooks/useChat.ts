@@ -195,7 +195,8 @@ export const useChat = () => {
         type: data.type || 'text',
         value: data.value,
         pixKey: data.pixKey,
-        pixType: data.pixType
+        pixType: data.pixType,
+        priceItems: data.priceItems
       };
 
       setMessages(prev => [...prev, assistantMessage]);

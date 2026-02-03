@@ -36,6 +36,7 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
   const isUser = message.role === 'user';
   const isQuote = message.type === 'quote';
   const isPix = message.type === 'pix';
+  const isPriceTable = message.type === 'price_table';
   const [copied, setCopied] = useState(false);
 
   // Efeito de digitação apenas para mensagens do assistente
@@ -97,7 +98,8 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
           'max-w-[75%] px-3 py-2 transition-all duration-300',
           isUser ? 'message-user' : 'message-assistant',
           isQuote && !isUser && 'quote-highlight',
-          isPix && !isUser && 'quote-highlight'
+          isPix && !isUser && 'quote-highlight',
+          isPriceTable && !isUser && 'quote-highlight'
         )}
       >
         <p className="leading-relaxed whitespace-pre-wrap inline">
@@ -150,6 +152,35 @@ export const ChatMessage = memo(({ message }: ChatMessageProps) => {
             </div>
             {copied && (
               <span className="text-[10px] text-green-400 mt-1 block">Chave copiada!</span>
+            )}
+          </div>
+        )}
+
+        {isPriceTable && message.priceItems && message.priceItems.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-primary/20">
+            <div className="max-h-[45vh] overflow-y-auto pr-1 custom-scrollbar">
+              {message.priceItems.map((item, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    'flex items-center justify-between gap-3 py-1.5 px-1',
+                    index !== message.priceItems!.length - 1 && 'border-b border-border/30'
+                  )}
+                >
+                  <span className="text-[13px] text-foreground/85 truncate">{item.name}</span>
+                  <span className="text-[13px] font-semibold text-foreground/95 whitespace-nowrap">
+                    {formatValue(item.price)}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {message.priceItems.length > 1 && (
+              <div className="flex items-center justify-between gap-3 mt-2 pt-2 border-t border-primary/30 px-1">
+                <span className="text-xs font-medium text-muted-foreground">Total</span>
+                <span className="text-lg font-bold gradient-text font-heading">
+                  {formatValue(message.priceItems.reduce((sum, item) => sum + item.price, 0))}
+                </span>
+              </div>
             )}
           </div>
         )}
