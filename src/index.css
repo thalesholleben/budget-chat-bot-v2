@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design System - Organic Dark Theme */
+/* Design System - Premium Dark Theme */
 
 @layer base {
   :root {
@@ -11,6 +11,7 @@
     --font-heading: 'Space Grotesk', system-ui, sans-serif;
 
     --background: 60 3% 15%;
+    --background-secondary: 60 3% 15%;
     --foreground: 210 40% 98%;
 
     --card: 60 3% 18%;
@@ -32,8 +33,9 @@
     --accent-foreground: 225 25% 6%;
 
     --accent-secondary: 216 56% 54%;
+    --accent-tertiary: 199 89% 60%;
 
-    /* Cores derivadas (sobrescritas pelo JS via VITE_ACCENT_COLOR) */
+    /* Cores derivadas (sobrescritas pelo JS via design.ts) */
     --primary-hover: 216 56% 54%;
     --primary-active: 216 56% 50%;
     --primary-disabled: 216 17% 29%;
@@ -64,7 +66,12 @@
   }
 
   html, body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
+    background: linear-gradient(
+      165deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--background-secondary)) 100%
+    );
     font-family: var(--font-body);
     margin: 0;
     padding: 0;
@@ -110,7 +117,8 @@
   .glass-card {
     @apply bg-card/60 backdrop-blur-2xl border border-border/50;
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.02),
+      0 0 0 1px rgba(255, 255, 255, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
       0 0.25rem 1.25rem rgba(0, 0, 0, 0.35);
   }
 
@@ -129,7 +137,8 @@
     background: linear-gradient(
       135deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--accent-secondary)) 100%
+      hsl(var(--accent-secondary)) 50%,
+      hsl(var(--accent-tertiary)) 100%
     );
   }
 
@@ -138,15 +147,21 @@
   }
 
   .message-user {
-    background: hsl(var(--primary) / 0.15);
-    border: 1.5px solid hsl(var(--primary) / 0.4);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.15) 0%,
+      hsl(var(--accent-secondary) / 0.10) 100%
+    );
+    border: 1.5px solid hsl(var(--primary) / 0.35);
+    border-top: 1.5px solid hsl(var(--primary) / 0.5);
     border-radius: 1.75rem 1.75rem 0.5rem 1.75rem;
     color: hsl(210 40% 98%);
   }
 
   .message-assistant {
-    background: hsl(var(--primary) / 0.08);
+    background: hsl(var(--primary) / 0.06);
     border: 1px solid hsla(var(--border), 0.5);
+    border-left: 2px solid hsl(var(--primary) / 0.3);
     border-radius: 1.75rem 1.75rem 1.75rem 0.5rem;
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.03),
@@ -157,13 +172,14 @@
     background: linear-gradient(
       135deg,
       hsl(var(--primary) / 0.12) 0%,
-      hsl(var(--accent-secondary) / 0.12) 100%
+      hsl(var(--accent-secondary) / 0.10) 50%,
+      hsl(var(--accent-tertiary) / 0.08) 100%
     );
     border: 1px solid hsl(var(--primary) / 0.25);
   }
 
   .glow-effect {
-    box-shadow: 
+    box-shadow:
       0 0 20px hsl(var(--primary) / 0.3),
       0 0 60px hsl(var(--primary) / 0.15);
   }
@@ -172,7 +188,8 @@
     background: linear-gradient(
       135deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--accent-secondary)) 100%
+      hsl(var(--accent-secondary)) 50%,
+      hsl(var(--accent-tertiary)) 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -192,6 +209,23 @@
     background: hsl(var(--primary-disabled));
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  /* Glow interativo (aplicado condicionalmente via classe) */
+  .glow-interactive {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-interactive:hover {
+    box-shadow:
+      0 0 15px hsl(var(--primary) / 0.2),
+      0 0 40px hsl(var(--primary) / 0.08);
+  }
+
+  .glow-interactive:focus-within {
+    box-shadow:
+      0 0 20px hsl(var(--primary) / 0.25),
+      0 0 50px hsl(var(--primary) / 0.1);
   }
 }
 

@@ -2,6 +2,7 @@ import { useState, useRef, memo } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { ENABLE_GLOW } from '@/lib/theme';
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -30,7 +31,7 @@ export const ChatInput = memo(({ onSend, isLoading, disabled }: ChatInputProps) 
   return (
     <div className="glass-header p-4 md:p-6">
       <div className="max-w-4xl mx-auto">
-        <div className="relative flex items-center gap-3 glass-card rounded-3xl p-2">
+        <div className={`relative flex items-center gap-3 glass-card rounded-3xl p-2${ENABLE_GLOW ? ' glow-interactive' : ''}`}>
           <Textarea
             ref={textareaRef}
             value={message}
@@ -45,7 +46,11 @@ export const ChatInput = memo(({ onSend, isLoading, disabled }: ChatInputProps) 
             onClick={handleSubmit}
             disabled={!message.trim() || isLoading}
             size="lg"
-            className="h-12 w-12 rounded-2xl bg-primary hover:bg-[hsl(var(--primary-hover))] transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-105 flex-shrink-0"
+            className="h-12 w-12 rounded-2xl transition-all duration-300 shadow-lg hover:scale-105 flex-shrink-0"
+            style={{
+              background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent-secondary)) 100%)',
+              boxShadow: '0 4px 15px hsl(var(--primary) / 0.3)',
+            }}
           >
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin" />

@@ -27,8 +27,8 @@ export const ChatHeader = ({ onNewConversation }: ChatHeaderProps) => {
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-primary/30 blur-xl rounded-full" />
-              <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center animate-pulse-glow">
+              <div className="absolute inset-0 blur-xl rounded-full" style={{ background: 'linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent-secondary) / 0.2))' }} />
+              <div className="relative w-12 h-12 rounded-2xl border border-primary/20 flex items-center justify-center animate-pulse-glow" style={{ background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent-secondary) / 0.1))' }}>
                 <Logo size={32} className="text-primary" />
               </div>
             </div>

@@ -1,5 +1,18 @@
-import { ACCENT_COLOR, ACCENT_GRADIENT, BACKGROUND_COLOR } from '@/config/colors';
-import { FONT_PRESET, FONT_PRESETS } from '@/config/fonts';
+import {
+  ACCENT_COLOR,
+  ACCENT_GRADIENT,
+  ACCENT_TERTIARY,
+  BACKGROUND_COLOR,
+  BACKGROUND_SECONDARY,
+  FONT_PRESET,
+  FONT_PRESETS,
+  ENABLE_GRID,
+  ENABLE_GLOW,
+  ENABLE_FLOATING_ORBS,
+} from '@/config/design';
+
+// Re-exportar flags para uso nos componentes
+export { ENABLE_GRID, ENABLE_GLOW, ENABLE_FLOATING_ORBS };
 
 /**
  * Converte HEX para HSL no formato que o Tailwind espera: "H S% L%"
@@ -97,6 +110,17 @@ export function applyAccentColors() {
     gradientStr = formatHSL(autoGradient.h, autoGradient.s, autoGradient.l);
   }
 
+  // Cor terciária
+  const tertiaryHex = ACCENT_TERTIARY;
+  let tertiaryStr: string;
+  if (tertiaryHex?.trim()) {
+    const tertiary = hexToHSL(tertiaryHex);
+    tertiaryStr = formatHSL(tertiary.h, tertiary.s, tertiary.l);
+  } else {
+    const autoTertiary = lighten(accent, 24);
+    tertiaryStr = formatHSL(autoTertiary.h, autoTertiary.s, autoTertiary.l);
+  }
+
   const root = document.documentElement;
 
   // Cores principais
@@ -113,6 +137,9 @@ export function applyAccentColors() {
 
   // Cor do gradiente
   root.style.setProperty('--accent-secondary', gradientStr);
+
+  // Cor terciária
+  root.style.setProperty('--accent-tertiary', tertiaryStr);
 }
 
 /**
@@ -136,10 +163,19 @@ export function applyBackgroundColor() {
   const borderBg = lighten(bg, 10);  // Border mais claro
   const borderStr = formatHSL(borderBg.h, borderBg.s, borderBg.l);
 
+  // Background secundário (para gradiente)
+  const bgSecHex = BACKGROUND_SECONDARY;
+  let bgSecStr = bgStr; // default: igual ao principal (sólido)
+  if (bgSecHex?.trim() && bgSecHex !== bgHex) {
+    const bgSec = hexToHSL(bgSecHex);
+    bgSecStr = formatHSL(bgSec.h, bgSec.s, bgSec.l);
+  }
+
   const root = document.documentElement;
 
   // Aplicar cores de background
   root.style.setProperty('--background', bgStr);
+  root.style.setProperty('--background-secondary', bgSecStr);
   root.style.setProperty('--sidebar-background', bgStr);
 
   // Aplicar cores derivadas

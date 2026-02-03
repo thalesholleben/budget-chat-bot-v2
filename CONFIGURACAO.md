@@ -18,70 +18,66 @@ VITE_WEBHOOK_API_KEY=sua-chave-secreta-aqui
 
 ---
 
-### 2️⃣ Cores do Aplicativo
+### 2️⃣ Design do Aplicativo (Cores, Fontes e Efeitos)
 
-Para alterar as cores, edite o arquivo **`src/config/colors.ts`**:
+Todas as customizações visuais ficam em um **arquivo único**: **`src/config/design.ts`**
 
 ```typescript
-export const ACCENT_COLOR = '#d97757';      // cor principal de destaque
-export const ACCENT_GRADIENT = '#d8623b';   // cor do gradiente (segunda cor)
-export const BACKGROUND_COLOR = '#262420';  // cor de fundo do app
+// --- CORES ---
+export const ACCENT_COLOR = '#4680f4';         // Cor primária (botões, links, destaque)
+export const ACCENT_GRADIENT = '#ab54e1';      // Cor secundária (gradientes)
+export const ACCENT_TERTIARY = '#38bdf8';      // Cor terciária (detalhes, brilhos)
+export const BACKGROUND_COLOR = '#0b0d13';     // Cor de fundo principal
+export const BACKGROUND_SECONDARY = '#0b0d13'; // Cor de fundo secundária (igual = sólido)
+
+// --- FONTES ---
+export const FONT_PRESET = 'MONTSERRAT';       // 'DEFAULT' | 'POPPINS' | 'MONTSERRAT'
+
+// --- EFEITOS ---
+export const ENABLE_GRID = true;               // Grade de malha no fundo
+export const ENABLE_GLOW = true;               // Brilho suave nos elementos interativos
+export const ENABLE_FLOATING_ORBS = true;      // Orbes animados no background
 ```
 
 **O que cada cor controla:**
 
 - **ACCENT_COLOR**: Cor principal de destaque (botões, bordas, links, ícones)
-- **ACCENT_GRADIENT**: Cor usada em degradês junto com a cor principal (deixe igual à principal para cores sólidas)
-- **BACKGROUND_COLOR**: Cor de fundo de toda a interface (cards, bordas e outros elementos são gerados automaticamente baseados nesta cor)
+- **ACCENT_GRADIENT**: Cor usada em degradês junto com a cor principal
+- **ACCENT_TERTIARY**: Terceira cor para detalhes e brilhos extras
+- **BACKGROUND_COLOR**: Cor de fundo principal
+- **BACKGROUND_SECONDARY**: Cor de fundo secundária (se diferente, cria gradiente no fundo)
 
 **Exemplos de combinações:**
 
-| Estilo | ACCENT_COLOR | BACKGROUND_COLOR |
-|--------|--------------|------------------|
-| Azul Corporativo | `#2F5FA7` | `#0A1929` |
-| Verde Natural | `#2FA76B` | `#0D1F1A` |
-| Roxo Premium | `#7B2FA7` | `#1A0D1F` |
-| Vermelho Energia | `#A72F3F` | `#1F0A0D` |
-| Laranja Amigável | `#A7692F` | `#1F1A0D` |
-| Minimalista | `#FFFFFF` | `#000000` |
+| Estilo | ACCENT_COLOR | ACCENT_GRADIENT | ACCENT_TERTIARY | BACKGROUND_COLOR |
+|--------|--------------|-----------------|-----------------|------------------|
+| Azul Tech | `#4680f4` | `#ab54e1` | `#38bdf8` | `#0b0d13` |
+| Verde Natural | `#2FA76B` | `#34D399` | `#6EE7B7` | `#0D1F1A` |
+| Roxo Premium | `#7B2FA7` | `#A855F7` | `#C084FC` | `#1A0D1F` |
+| Laranja Amigável | `#d97757` | `#d8623b` | `#FBBF24` | `#262420` |
 
-**Dicas:**
-- Use sites como [coolors.co](https://coolors.co) para escolher cores harmônicas
-- Para backgrounds, prefira cores escuras (preto, cinza escuro, etc) para melhor legibilidade
-- Após alterar, faça commit + push para aplicar as mudanças
-
----
-
-### 3️⃣ Fontes do Aplicativo
-
-Para alterar as fontes, edite o arquivo **`src/config/fonts.ts`**:
-
-```typescript
-export const FONT_PRESET = 'DEFAULT';
-```
-
-**Opções disponíveis:**
+**Fontes disponíveis:**
 
 | Preset | Descrição | Estilo |
 |--------|-----------|--------|
-| `DEFAULT` | Crimson Pro (corpo) + Space Grotesk (títulos) | Elegante, clássico |
+| `DEFAULT` | Crimson Pro (corpo) + Space Grotesk (titulos) | Elegante, classico |
 | `POPPINS` | Poppins (tudo) | Moderno, limpo, arredondado |
 | `MONTSERRAT` | Montserrat (tudo) | Corporativo, profissional |
 
-**Exemplos:**
+**Efeitos visuais:**
 
-```typescript
-// Para fonte moderna e limpa
-export const FONT_PRESET = 'POPPINS';
+| Efeito | Descricao |
+|--------|-----------|
+| `ENABLE_GRID` | Grade de malha sutil no fundo (com fade nas bordas) |
+| `ENABLE_GLOW` | Brilho suave no input e botoes ao interagir |
+| `ENABLE_FLOATING_ORBS` | Orbes coloridos animados no background |
 
-// Para fonte corporativa
-export const FONT_PRESET = 'MONTSERRAT';
-
-// Para manter a fonte elegante padrão
-export const FONT_PRESET = 'DEFAULT';
-```
-
-**Dica:** Após alterar, faça commit + push para aplicar as mudanças. As fontes são carregadas automaticamente do Google Fonts.
+**Dicas:**
+- Use sites como [coolors.co](https://coolors.co) para escolher cores harmonicas
+- Para backgrounds, prefira cores escuras para melhor legibilidade
+- Coloque `BACKGROUND_SECONDARY` igual ao `BACKGROUND_COLOR` para fundo solido
+- Desative efeitos (`false`) para clientes que preferem visual mais limpo
+- Apos alterar, faca commit + push para aplicar as mudancas
 
 ---
 

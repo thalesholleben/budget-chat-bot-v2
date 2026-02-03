@@ -84,7 +84,7 @@ export const EmptyChat = memo(({ onSuggestionClick }: EmptyChatProps) => {
             <button
               key={option}
               onClick={() => handleOptionClick(option, index)}
-              className="w-full glass-card rounded-2xl px-5 py-3.5 md:px-6 md:py-4 text-left text-[17px] md:text-[20px] text-foreground hover:bg-card/80 transition-all duration-300 group flex items-center justify-between hover:border-primary/30"
+              className="w-full glass-card glow-interactive rounded-2xl px-5 py-3.5 md:px-6 md:py-4 text-left text-[17px] md:text-[18px] text-foreground hover:bg-card/80 transition-all duration-300 group flex items-center justify-between hover:border-primary/30"
             >
               <span>{option}</span>
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
