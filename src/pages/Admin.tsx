@@ -9,15 +9,30 @@ const STORAGE_KEY = 'business_rules';
 const Admin = () => {
   const [rules, setRules] = useState('');
   const [saved, setSaved] = useState(true);
+  const [showEmptyWarning, setShowEmptyWarning] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       setRules(stored);
+    } else {
+      // Mostrar aviso se não houver regras salvas
+      setShowEmptyWarning(true);
     }
   }, []);
 
   const handleSave = () => {
+    // Confirmar se está salvando vazio
+    if (!rules.trim()) {
+      const confirmed = window.confirm(
+        '⚠️ ATENÇÃO: Você está prestes a salvar regras VAZIAS!\n\n' +
+        'Isso pode acontecer em modo anônimo ou se o cache foi limpo.\n' +
+        'Salvar vazio pode sobrescrever regras existentes no sistema.\n\n' +
+        'Tem CERTEZA que deseja continuar?'
+      );
+      if (!confirmed) return;
+    }
+
     localStorage.setItem(STORAGE_KEY, rules);
     setSaved(true);
     toast.success('Regras salvas com sucesso');
@@ -33,6 +48,10 @@ const Admin = () => {
   const handleChange = (value: string) => {
     setRules(value);
     setSaved(false);
+    // Esconder aviso quando começar a digitar
+    if (showEmptyWarning && value.trim()) {
+      setShowEmptyWarning(false);
+    }
   };
 
   return (
@@ -60,6 +79,30 @@ const Admin = () => {
               </p>
             </div>
           </div>
+
+          {/* Aviso de regras vazias */}
+          {showEmptyWarning && (
+            <div className="mb-4 p-4 rounded-xl border-2 border-amber-400/50 bg-amber-400/10 animate-fade-in">
+              <div className="flex items-start gap-3">
+                <span className="text-xl">⚠️</span>
+                <div className="flex-1">
+                  <h3 className="text-sm font-semibold text-amber-400 mb-1">
+                    Nenhuma regra encontrada
+                  </h3>
+                  <p className="text-xs text-foreground/70 leading-relaxed">
+                    Isso pode acontecer em modo anônimo, cache limpo, ou primeiro acesso.
+                    Tenha cuidado ao salvar regras vazias, pois pode sobrescrever configurações existentes.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowEmptyWarning(false)}
+                  className="text-foreground/50 hover:text-foreground text-sm"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Textarea */}
           <textarea
