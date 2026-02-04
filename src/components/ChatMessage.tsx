@@ -9,12 +9,14 @@ interface ChatMessageProps {
   message: ChatMessageType;
 }
 
-// Transforma URLs https em links clicáveis
+// Transforma URLs https em links clicáveis e texto em negrito
 const renderTextWithLinks = (text: string) => {
+  // Primeiro, separa URLs
   const urlRegex = /(https:\/\/[^\s]+)/g;
   const parts = text.split(urlRegex);
 
   return parts.map((part, index) => {
+    // Se é uma URL, renderiza como link
     if (urlRegex.test(part)) {
       return (
         <a
@@ -28,7 +30,31 @@ const renderTextWithLinks = (text: string) => {
         </a>
       );
     }
-    return part;
+
+    // Se não é URL, processa texto em negrito (** ou *)
+    // Regex para capturar **texto** ou *texto* (com prioridade para **)
+    const boldRegex = /(\*\*\*\*([^*]+)\*\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*)/g;
+    const textParts = part.split(boldRegex);
+
+    return textParts.map((textPart, textIndex) => {
+      // Se é undefined ou string vazia, ignora
+      if (!textPart) return null;
+
+      // Verifica se é um dos grupos capturados (****texto****, **texto** ou *texto*)
+      const isBoldQuadruple = textParts[textIndex - 3] !== undefined; // grupo de ****texto****
+      const isBoldDouble = textParts[textIndex - 2] !== undefined && !isBoldQuadruple; // grupo de **texto**
+      const isBoldSingle = textParts[textIndex - 1] !== undefined && !isBoldDouble && !isBoldQuadruple; // grupo de *texto*
+
+      if (isBoldQuadruple || isBoldDouble || isBoldSingle) {
+        return (
+          <strong key={`${index}-${textIndex}`} className="font-bold">
+            {textPart}
+          </strong>
+        );
+      }
+
+      return textPart;
+    }).filter(Boolean); // Remove nulls
   });
 };
 
