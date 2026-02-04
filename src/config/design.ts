@@ -5,17 +5,17 @@
 // ============================================
 
 // --- CORES ---
-export const ACCENT_COLOR = '#4680f4';         // Cor primária (botões, links, destaque)
-export const ACCENT_GRADIENT = '#ab54e1';      // Cor secundária (gradientes)
+export const ACCENT_COLOR = '#363636';         // Cor primária (botões, links, destaque)
+export const ACCENT_GRADIENT = '#161616';      // Cor secundária (gradientes)
 export const ACCENT_TERTIARY = '#38bdf8';      // Cor terciária (detalhes, brilhos, badges)
-export const BACKGROUND_COLOR = '#0b0d13';     // Cor de fundo principal
-export const BACKGROUND_SECONDARY = '#0b0d13'; // Cor de fundo secundária (gradiente; igual = sólido)
+export const BACKGROUND_COLOR = '#eeeeee';     // Cor de fundo principal
+export const BACKGROUND_SECONDARY = '#f7f7f7'; // Cor de fundo secundária (gradiente; igual = sólido)
 
 // --- MODO DE TEXTO ---
 // Opções: 'dark' | 'light'
 // dark = textos brancos e cinzas claros (padrão, para fundos escuros)
 // light = textos pretos e cinzas escuros (para fundos claros)
-export const TEXT_MODE: 'dark' | 'light' = 'dark';
+export const TEXT_MODE: 'dark' | 'light' = 'light';
 
 // --- FONTES ---
 // Opções: 'DEFAULT' | 'POPPINS' | 'MONTSERRAT'
