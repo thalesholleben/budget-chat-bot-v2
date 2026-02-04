@@ -4,6 +4,7 @@ import {
   ACCENT_TERTIARY,
   BACKGROUND_COLOR,
   BACKGROUND_SECONDARY,
+  TEXT_MODE,
   FONT_PRESET,
   FONT_PRESETS,
   ENABLE_GRID,
@@ -189,6 +190,35 @@ export function applyBackgroundColor() {
   // Bordas
   root.style.setProperty('--border', borderStr);
   root.style.setProperty('--sidebar-border', borderStr);
+}
+
+/**
+ * Aplica as cores de texto baseado no TEXT_MODE (light/dark)
+ */
+export function applyTextColors() {
+  const root = document.documentElement;
+
+  if (TEXT_MODE === 'light') {
+    // Light mode: textos escuros para fundos claros
+    root.style.setProperty('--foreground', '210 20% 15%');           // Texto principal: quase preto
+    root.style.setProperty('--muted-foreground', '215 15% 40%');     // Texto secundário: cinza escuro
+    root.style.setProperty('--card-foreground', '210 20% 15%');
+    root.style.setProperty('--popover-foreground', '210 20% 15%');
+    root.style.setProperty('--secondary-foreground', '210 20% 15%');
+    root.style.setProperty('--sidebar-foreground', '210 20% 15%');
+    root.style.setProperty('--primary-foreground', '210 40% 98%');   // Mantém branco para contraste em botões
+    root.style.setProperty('--accent-foreground', '210 40% 98%');    // Mantém branco para contraste em acentos
+  } else {
+    // Dark mode: textos claros para fundos escuros (padrão atual)
+    root.style.setProperty('--foreground', '210 40% 98%');           // Texto principal: quase branco
+    root.style.setProperty('--muted-foreground', '215 20% 65%');     // Texto secundário: cinza claro
+    root.style.setProperty('--card-foreground', '210 40% 98%');
+    root.style.setProperty('--popover-foreground', '210 40% 98%');
+    root.style.setProperty('--secondary-foreground', '210 40% 98%');
+    root.style.setProperty('--sidebar-foreground', '210 40% 98%');
+    root.style.setProperty('--primary-foreground', '225 25% 6%');    // Texto em botões: escuro
+    root.style.setProperty('--accent-foreground', '225 25% 6%');     // Texto em acentos: escuro
+  }
 }
 
 /**
