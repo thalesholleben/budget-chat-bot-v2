@@ -5,15 +5,15 @@
 // ============================================
 
 // --- CORES ---
-export const ACCENT_COLOR = '#4680f4';         // Cor primária (botões, links, destaque)
-export const ACCENT_GRADIENT = '#ab54e1';      // Cor secundária (gradientes)
+export const ACCENT_COLOR = '#c346f4';         // Cor primária (botões, links, destaque)
+export const ACCENT_GRADIENT = '#8736b9';      // Cor secundária (gradientes)
 export const ACCENT_TERTIARY = '#38bdf8';      // Cor terciária (detalhes, brilhos, badges)
 export const BACKGROUND_COLOR = '#0b0d13';     // Cor de fundo principal
 export const BACKGROUND_SECONDARY = '#0b0d13'; // Cor de fundo secundária (gradiente; igual = sólido)
 
 // --- FONTES ---
 // Opções: 'DEFAULT' | 'POPPINS' | 'MONTSERRAT'
-export const FONT_PRESET = 'MONTSERRAT';
+export const FONT_PRESET = 'POPPINS';
 
 // --- EFEITOS ---
 export const ENABLE_GRID = true;               // Grade de malha no fundo

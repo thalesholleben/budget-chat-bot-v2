@@ -52,7 +52,7 @@ export const EmptyChat = memo(({ onSuggestionClick }: EmptyChatProps) => {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-4 py-4 md:px-8 text-center animate-slide-up">
       <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3 font-heading">
-        Olá! Sou o assistente do
+        Olá! Sou o assistente da
       </h2>
       <p className="text-3xl md:text-4xl gradient-text font-semibold mb-2 md:mb-4 font-heading">
         {professionalName}
