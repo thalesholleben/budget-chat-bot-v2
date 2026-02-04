@@ -10,10 +10,11 @@ interface ChatMessageProps {
 }
 
 // Processa negrito: **texto** ou *texto*
+// Suporta casos consecutivos como **a****b** → [a][b] ambos em negrito
 const renderBold = (text: string, keyPrefix: string): ReactNode[] => {
   const result: ReactNode[] = [];
-  // Prioridade: **** > ** > *
-  const boldRegex = /\*{1,4}([^*]+)\*{1,4}/g;
+  // Primeiro captura **texto**, depois *texto* (prioridade para duplo)
+  const boldRegex = /\*\*(.+?)\*\*|\*(.+?)\*/g;
   let lastIndex = 0;
 
   for (const match of text.matchAll(boldRegex)) {
@@ -22,10 +23,11 @@ const renderBold = (text: string, keyPrefix: string): ReactNode[] => {
     if (start > lastIndex) {
       result.push(text.slice(lastIndex, start));
     }
-    // Texto em negrito (sem os asteriscos)
+    // match[1] = conteúdo de **texto**, match[2] = conteúdo de *texto*
+    const boldContent = match[1] ?? match[2];
     result.push(
       <strong key={`${keyPrefix}-${start}`} className="font-bold">
-        {match[1]}
+        {boldContent}
       </strong>
     );
     lastIndex = start + match[0].length;
