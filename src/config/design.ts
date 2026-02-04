@@ -11,6 +11,12 @@ export const ACCENT_TERTIARY = '#e4683f';      // Cor terciária (detalhes, bril
 export const BACKGROUND_COLOR = '#262624';     // Cor de fundo principal
 export const BACKGROUND_SECONDARY = '#262624'; // Cor de fundo secundária (gradiente; igual = sólido)
 
+// --- MODO DE TEXTO ---
+// Opções: 'dark' | 'light'
+// dark = textos brancos e cinzas claros (padrão, para fundos escuros)
+// light = textos pretos e cinzas escuros (para fundos claros)
+export const TEXT_MODE: 'dark' | 'light' = 'dark';
+
 // --- FONTES ---
 // Opções: 'DEFAULT' | 'POPPINS' | 'MONTSERRAT'
 export const FONT_PRESET = 'DEFAULT';
