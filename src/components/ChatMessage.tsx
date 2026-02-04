@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, memo, ReactNode } from 'react';
 import { ChatMessage as ChatMessageType } from '@/types/chat';
 import { User, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -9,53 +9,69 @@ interface ChatMessageProps {
   message: ChatMessageType;
 }
 
+// Processa negrito: **texto** ou *texto*
+const renderBold = (text: string, keyPrefix: string): ReactNode[] => {
+  const result: ReactNode[] = [];
+  // Prioridade: **** > ** > *
+  const boldRegex = /\*{1,4}([^*]+)\*{1,4}/g;
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(boldRegex)) {
+    const start = match.index!;
+    // Texto antes do match
+    if (start > lastIndex) {
+      result.push(text.slice(lastIndex, start));
+    }
+    // Texto em negrito (sem os asteriscos)
+    result.push(
+      <strong key={`${keyPrefix}-${start}`} className="font-bold">
+        {match[1]}
+      </strong>
+    );
+    lastIndex = start + match[0].length;
+  }
+
+  // Texto restante após o último match
+  if (lastIndex < text.length) {
+    result.push(text.slice(lastIndex));
+  }
+
+  return result.length > 0 ? result : [text];
+};
+
 // Transforma URLs https em links clicáveis e texto em negrito
 const renderTextWithLinks = (text: string) => {
-  // Primeiro, separa URLs
   const urlRegex = /(https:\/\/[^\s]+)/g;
-  const parts = text.split(urlRegex);
+  const result: ReactNode[] = [];
+  let lastIndex = 0;
 
-  return parts.map((part, index) => {
-    // Se é uma URL, renderiza como link
-    if (urlRegex.test(part)) {
-      return (
-        <a
-          key={index}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary underline underline-offset-2 hover:text-[hsl(var(--primary-hover))] transition-colors break-all"
-        >
-          {part}
-        </a>
-      );
+  for (const match of text.matchAll(urlRegex)) {
+    const start = match.index!;
+    // Texto antes da URL — processar negrito
+    if (start > lastIndex) {
+      result.push(...renderBold(text.slice(lastIndex, start), `t-${start}`));
     }
+    // URL como link
+    result.push(
+      <a
+        key={`url-${start}`}
+        href={match[0]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary underline underline-offset-2 hover:text-[hsl(var(--primary-hover))] transition-colors break-all"
+      >
+        {match[0]}
+      </a>
+    );
+    lastIndex = start + match[0].length;
+  }
 
-    // Se não é URL, processa texto em negrito (** ou *)
-    // Regex para capturar **texto** ou *texto* (com prioridade para **)
-    const boldRegex = /(\*\*\*\*([^*]+)\*\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*)/g;
-    const textParts = part.split(boldRegex);
+  // Texto restante após a última URL — processar negrito
+  if (lastIndex < text.length) {
+    result.push(...renderBold(text.slice(lastIndex), `t-end`));
+  }
 
-    return textParts.map((textPart, textIndex) => {
-      // Se é undefined ou string vazia, ignora
-      if (!textPart) return null;
-
-      // Verifica se é um dos grupos capturados (****texto****, **texto** ou *texto*)
-      const isBoldQuadruple = textParts[textIndex - 3] !== undefined; // grupo de ****texto****
-      const isBoldDouble = textParts[textIndex - 2] !== undefined && !isBoldQuadruple; // grupo de **texto**
-      const isBoldSingle = textParts[textIndex - 1] !== undefined && !isBoldDouble && !isBoldQuadruple; // grupo de *texto*
-
-      if (isBoldQuadruple || isBoldDouble || isBoldSingle) {
-        return (
-          <strong key={`${index}-${textIndex}`} className="font-bold">
-            {textPart}
-          </strong>
-        );
-      }
-
-      return textPart;
-    }).filter(Boolean); // Remove nulls
-  });
+  return result;
 };
 
 export const ChatMessage = memo(({ message }: ChatMessageProps) => {
