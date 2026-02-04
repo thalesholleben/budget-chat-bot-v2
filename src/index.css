@@ -156,7 +156,7 @@
     border: 1.5px solid hsl(var(--primary) / 0.35);
     border-top: 1.5px solid hsl(var(--primary) / 0.5);
     border-radius: 1.75rem 1.75rem 0.5rem 1.75rem;
-    color: hsl(210 40% 98%);
+    color: hsl(var(--foreground));
     font-size: calc(1.125rem * var(--font-scale));
   }
 
